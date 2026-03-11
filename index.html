@@ -1,11 +1,451 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <title>Dot2Horizon</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dot2Horizon — IT Solutions & Software Development</title>
+  <meta name="description" content="Dot2Horizon은 소프트웨어 개발 및 IT 솔루션을 제공하는 기업입니다. Dot2Horizon provides software development and IT solutions.">
+  <style>
+    :root {
+      --primary: #111111;
+      --accent: #999999;
+      --text: #222222;
+      --text-light: #777777;
+      --bg: #ffffff;
+      --bg-alt: #f5f5f5;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--text-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .lang-toggle {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-light);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .lang-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 10rem 2rem 6rem;
+      text-align: center;
+      background: var(--bg);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      line-height: 1.15;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-light);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--text-light);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* About */
+    #about {
+      background: var(--bg-alt);
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Contact */
+    #contact {
+      background: var(--bg-alt);
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item h4 {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-item p {
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      section {
+        padding: 3.5rem 1.5rem;
+      }
+    }
+
+    /* lang toggling */
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: revert; }
+  </style>
 </head>
 <body>
-  <h1>Dot2Horizon</h1>
-  <p>We create meaningful digital experiences.</p>
-  <p>Contact: ian@dot2horizon.com</p>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">Dot2<span>Horizon</span></a>
+      <ul class="nav-links">
+        <li><a href="#about" class="ko">회사 소개</a><a href="#about" class="en">About</a></li>
+        <li><a href="#services" class="ko">서비스</a><a href="#services" class="en">Services</a></li>
+        <li><a href="#contact" class="ko">연락처</a><a href="#contact" class="en">Contact</a></li>
+      </ul>
+      <button class="lang-toggle" onclick="toggleLang()">EN</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>
+      <span class="ko">아이디어에서 현실로,<br><span>기술로 연결</span>합니다</span>
+      <span class="en">From Ideas to Reality,<br><span>Connected by Technology</span></span>
+    </h1>
+    <p>
+      <span class="ko">Dot2Horizon은 소프트웨어 개발과 IT 솔루션을 통해 비즈니스의 성장을 지원합니다.</span>
+      <span class="en">Dot2Horizon empowers business growth through software development and IT solutions.</span>
+    </p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-title">About Us</div>
+      <h2 class="section-heading">
+        <span class="ko">기술의 가능성을 현실로</span>
+        <span class="en">Turning Possibilities into Reality</span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">
+          Dot2Horizon은 소프트웨어 기획, 개발, 운영에 이르는 전 과정을 아우르는 IT 솔루션 기업입니다. 클라이언트의 비전을 깊이 이해하고, 최적의 기술 전략으로 디지털 전환을 실현합니다.
+        </span>
+        <span class="en">
+          Dot2Horizon is an IT solutions company covering the entire spectrum of software planning, development, and operations. We deeply understand our clients' vision and realize digital transformation through optimal technology strategies.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-title">Services</div>
+      <h2 class="section-heading">
+        <span class="ko">제공 서비스</span>
+        <span class="en">What We Do</span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">다양한 기술 스택과 경험을 바탕으로, 고객 맞춤형 솔루션을 제공합니다.</span>
+        <span class="en">We deliver tailored solutions backed by diverse technology stacks and hands-on experience.</span>
+      </p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3>
+            <span class="ko">소프트웨어 개발</span>
+            <span class="en">Software Development</span>
+          </h3>
+          <p>
+            <span class="ko">웹, 모바일, 백엔드 등 다양한 플랫폼에 최적화된 소프트웨어를 설계하고 개발합니다.</span>
+            <span class="en">We design and develop software optimized for web, mobile, backend, and various platforms.</span>
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <h3>
+            <span class="ko">앱 개발</span>
+            <span class="en">App Development</span>
+          </h3>
+          <p>
+            <span class="ko">iOS 및 Android 플랫폼을 위한 네이티브 및 크로스플랫폼 애플리케이션을 개발합니다.</span>
+            <span class="en">We build native and cross-platform applications for iOS and Android.</span>
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">☁️</div>
+          <h3>
+            <span class="ko">IT 컨설팅</span>
+            <span class="en">IT Consulting</span>
+          </h3>
+          <p>
+            <span class="ko">기술 전략 수립부터 시스템 아키텍처 설계까지, 비즈니스 목표에 맞는 기술 자문을 제공합니다.</span>
+            <span class="en">From technology strategy to system architecture design, we provide technical consulting aligned with your business goals.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-title">Contact</div>
+      <h2 class="section-heading">
+        <span class="ko">문의하기</span>
+        <span class="en">Get in Touch</span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">프로젝트 문의나 협업 제안은 아래 연락처로 연락해 주세요.</span>
+        <span class="en">For project inquiries or partnership proposals, please reach out through the contacts below.</span>
+      </p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:contact@dot2horizon.com">contact@dot2horizon.com</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div>
+            <h4>Website</h4>
+            <p><a href="https://dot2horizon.github.io">dot2horizon.github.io</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Dot2Horizon. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleLang() {
+      const body = document.body;
+      const btn = document.querySelector('.lang-toggle');
+      body.classList.toggle('lang-en');
+      btn.textContent = body.classList.contains('lang-en') ? 'KO' : 'EN';
+    }
+
+    // smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
 </body>
 </html>
